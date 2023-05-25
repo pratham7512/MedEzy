@@ -5,7 +5,6 @@ from llama_index import LLMPredictor, ServiceContext
 import sys
 #from google.colab import drive
 import os
-import pyttsx3
 import streamlit as st
 
 # Set the page title
@@ -17,24 +16,7 @@ if st.sidebar.button("New Chat"):
 
 API_KEY=str(st.sidebar.text_input("Your OpenAI API key :",placeholder="Enter to submit"))
 os.environ["OPENAI_API_KEY"] = API_KEY
-
-
-
-def open_google_maps():
-    # Open Google Maps with current location for doctors nearby
-    webbrowser.open('https://www.google.com/maps/search/doctors+nearby/')
-
-
-
-def text2speech(text):
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 180)
-    # Convert text to speech
-    engine.say(text)
-    engine.runAndWait()
     
-   
-
 def construct_index(directory_path):
   # set maximum input size
   max_input_size = 4096
@@ -96,7 +78,7 @@ if API_KEY:
             st.info(st.session_state["past"][i],icon="🧐")
             st.success(st.session_state["generated"][i], icon="🤖")
 
-    text2speech(str(output))
+    #text2speech(str(output))
 else:
     st.sidebar.error("Enter your OpenAI API key!!")
     st.sidebar.info(" Medical knowledge is constantly evolving, so please keep in mind that my responses are based on the information available up until September 2021.")    
