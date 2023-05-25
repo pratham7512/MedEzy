@@ -1,3 +1,4 @@
+pip==23.1.2
 langchain==0.0.174
 llama_index==0.5.27
 pyttsx3==2.90
