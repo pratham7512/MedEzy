@@ -16,7 +16,7 @@ if st.sidebar.button("New Chat"):
 
 API_KEY=str(st.sidebar.text_input("Your OpenAI API key :",placeholder="Enter to submit"))
 os.environ["OPENAI_API_KEY"] = API_KEY
-    
+
 def construct_index(directory_path):
   # set maximum input size
   max_input_size = 4096
@@ -65,7 +65,7 @@ output=" "
 if API_KEY:
     st.sidebar.success('API key entered successfully.')
     st.sidebar.info(" Medical knowledge is constantly evolving, so please keep in mind that my responses are based on the information available up until September 2021.")
-    index = construct_index("D:\DSA\codehelp\contents")
+    index = construct_index("./data")
     if query:
         output = ask_bot(query)
         # store the output
