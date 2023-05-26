@@ -7,7 +7,6 @@ import sys
 import os
 import pyttsx3
 import streamlit as st
-txt_run=True
 def construct_index(directory_path):
   # set maximum input size
   max_input_size = 4096
@@ -38,20 +37,10 @@ def ask_bot(query):
   response = index.query(query)
   return response
 
-def text2speech(text):
-    txt_run=False
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 160)
-    # Convert text to speech
-    engine.say(text)
-    engine.runAndWait()
-    txt_run=True
-
 def clear_generated(generated_list,past_list):
     generated_list.clear()
     past_list.clear()
     
-
 # Set the page title
 st.set_page_config(page_title="MedEzy")
 
@@ -73,7 +62,7 @@ st.title("MedEzy")
 query= st.text_input("🤖Ask AI", placeholder="Enter to submit")
 
 output=" "
-if API_KEY and txt_run:
+if API_KEY:
     st.sidebar.success('API key entered successfully.')
     st.sidebar.write(" Medical knowledge is constantly evolving, so please keep in mind that my responses are based on the information available up until September 2021.")
     index = construct_index("D:\DSA\codehelp\contents")
@@ -84,27 +73,27 @@ if API_KEY and txt_run:
         st.session_state.generated.append(str(output))
     else:
         if len(st.session_state.generated)==0:
-            st.success("""👋 Hi there,
-
-Ask me anything related to medical queries, and I'll do my best to assist you! """,icon="🤖")
-            text2speech("Hi there, Ask me anything related to medical queries, and I'll do my best to assist you!")
-    with st.expander("Conversation", expanded=True):
-        for i in range(len(st.session_state['generated'])-1, -1, -1):
-            st.info(st.session_state["past"][i],icon="🧐")
-            st.success(st.session_state["generated"][i], icon="🤖")
-
-        text2speech(str(output))
-else:
-    if txt_run:
-        st.sidebar.error("Enter your OpenAI API key!!")
-        if st.sidebar.button("Get your OpenAI API key"):
-            st.experimental_set_query_params(link="https://platform.openai.com/account/api-keys")
-        st.success("""👋 Welcome to the MedEzy Bot! 🩺
+            st.success("""👋 Welcome to the MedEzy Bot! 🩺
 
 I'm here to provide you with accurate and reliable information on various medical topics. Whether you have questions about symptoms, treatments, medications, preventive care, or nutrition, I'm here to help. Please remember to consult a healthcare professional for personalized advice.
 
 Ask me anything related to medical queries, and I'll do my best to assist you! """,icon="🤖")
-        st.success("Open sidebar from left and enter your OpenAI API key to chat with Me")
-        text2speech("Open sidebar from left and enter your Open A.I. A.P.I. key to chat With Me")
+    with st.expander("Conversation", expanded=True):
+        for i in range(len(st.session_state['generated'])-1, -1, -1):
+            st.info(st.session_state["past"][i],icon="🧐")
+            st.success(st.session_state["generated"][i], icon="🤖")
+else:
+    
+      st.sidebar.error("Enter your OpenAI API key!!")
+      if st.sidebar.button("Get your OpenAI API key"):
+          st.experimental_set_query_params(link="https://platform.openai.com/account/api-keys")
+      st.error("Open sidebar from left and enter your OpenAI API key to activate")
+      st.success("""👋 Welcome to the MedEzy Bot! 🩺
+
+I'm here to provide you with accurate and reliable information on various medical topics. Whether you have questions about symptoms, treatments, medications, preventive care, or nutrition, I'm here to help. Please remember to consult a healthcare professional for personalized advice.
+
+Ask me anything related to medical queries, and I'll do my best to assist you! """,icon="🤖")
+        
+      
     
 
