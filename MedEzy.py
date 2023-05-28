@@ -20,7 +20,7 @@ def construct_index(directory_path):
   prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
 
   # define LLM
-  llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003", max_tokens=num_outputs , prompt="You are a medical bot,only answer questions related to medical field for other questions which are not related to medical say i don't know i am medical bot"))
+  llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003", max_tokens=num_outputs))
   
   documents = SimpleDirectoryReader(directory_path).load_data()
   
