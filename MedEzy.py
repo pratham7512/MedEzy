@@ -65,7 +65,7 @@ output=" "
 if API_KEY:
     st.sidebar.success('API key entered successfully.')
     st.sidebar.write(" Medical knowledge is constantly evolving, so please keep in mind that my responses are based on the information available up until September 2021.")
-    index = construct_index("./data")
+    #index = construct_index("./data")
     if query:
         output = ask_bot(query)
         # store the output
