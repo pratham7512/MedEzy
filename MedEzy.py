@@ -40,7 +40,13 @@ def ask_bot(query):
 def clear_generated(generated_list,past_list):
     generated_list.clear()
     past_list.clear()
-    
+
+def open_link(url):
+    js = f"window.open('{url}')"
+    html = '<img src onerror="{}" style="display:none">'.format(js)
+    div = '<div>{}</div>'.format(html)
+    st.markdown(div, unsafe_allow_html=True)
+
 # Set the page title
 st.set_page_config(page_title="MedEzy")
 
@@ -86,7 +92,8 @@ else:
     
       st.sidebar.error("Enter your OpenAI API key!!")
       if st.sidebar.button("Get your OpenAI API key"):
-          st.experimental_set_query_params(link="https://platform.openai.com/account/api-keys")
+          # Call the function to open the link
+          open_link("https://platform.openai.com/account/api-keys")
       st.error("Open sidebar from left and enter your OpenAI API key to activate")
       st.success("""👋 Welcome to the MedEzy Bot! 🩺
 
