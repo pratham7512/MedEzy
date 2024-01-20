@@ -22,7 +22,7 @@ To interact with Medezy, follow these steps:
 
 Include screenshots here to demonstrate Medezy in action. Show examples of conversations, user interactions, or specific features of the chatbot.
 
-![Screenshot 1](/assets/)
+![Screenshot 1](./assets/screenshot.jpeg)
 
 ## Examples
 
